@@ -19,28 +19,6 @@ module.exports = {
     globalObject: '(0, eval)("this")',
     chunkFilename: `[name].${platform}.js`
   },
-  optimization: {
-    splitChunks: {
-      chunks: "async",
-      minSize: 30000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: "~",
-      name: true,
-      cacheGroups: {
-        commons: {
-          name: "commons",
-          chunks: "initial",
-          test: ({ resource } = {}) => resource && /demos/.test(resource)
-        },
-        default: {
-          minChunks: 2,
-          reuseExistingChunk: true
-        }
-      }
-    }
-  },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
@@ -53,7 +31,7 @@ module.exports = {
       context: path.resolve(__dirname, ".."),
       manifest
     }),
-    new SimpleProgressWebpackPlugin(),
+    new SimpleProgressWebpackPlugin()
     // new BundleAnalyzerPlugin()
   ],
   module: {
