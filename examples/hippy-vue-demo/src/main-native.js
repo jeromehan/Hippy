@@ -9,7 +9,7 @@ import { setApp } from './util';
 // Vue.config.silent = true;
 
 Vue.config.productionTip = false;
-
+Vue.registerElement('MyView');
 // Hippy 终端组件扩展中间件，可以使用 modal、view-pager、tab-host、ul-refresh 等原生组件了。
 Vue.use(HippyVueNativeComponents);
 Vue.use(VueRouter);
