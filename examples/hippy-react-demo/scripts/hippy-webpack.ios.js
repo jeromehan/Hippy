@@ -5,7 +5,6 @@ const pkg = require("../package.json");
 const manifest = require("../dist/ios/vendor-manifest.json");
 const SimpleProgressWebpackPlugin = require("simple-progress-webpack-plugin");
 const platform = "ios";
-
 module.exports = {
   mode: "production",
   bail: true,

@@ -2,16 +2,23 @@ const path = require("path");
 const webpack = require("webpack");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
-const pkg = require("../package.json");
 const manifest = require("../dist/android/vendor-manifest.json");
 const SimpleProgressWebpackPlugin = require("simple-progress-webpack-plugin");
 const platform = "android";
+const glob = require('glob')
+function getEntries(globPath) {
+  const entries = glob.sync(globPath).reduce((result, entry) => {
+    const moduleName = path.basename(path.dirname(entry)) // 获取模块名称
+    result[moduleName] = entry
+    return result
+  }, {})
+  return entries
+}
+const entries = getEntries('./src/pages/**/main-native.js')
 module.exports = {
   mode: "production",
   bail: true,
-  entry: {
-    index: [path.resolve(pkg.nativeMain)]
-  },
+  entry: entries,
   output: {
     filename: `[name].${platform}.js`,
     path: path.resolve(`./dist/${platform}/`),

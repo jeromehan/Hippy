@@ -39,9 +39,9 @@
     #endif
 
     NSString *commonBundlePath = [[NSBundle mainBundle] pathForResource:@"vendor.ios" ofType:@"js" inDirectory:@"res"];
-    NSString *businessBundlePath = [[NSBundle mainBundle] pathForResource:@"index.ios" ofType:@"js" inDirectory:@"res"];
+    NSString *businessBundlePath = [[NSBundle mainBundle] pathForResource:@"feed.ios" ofType:@"js" inDirectory:@"res"];
     HippyBridge *bridge = [[HippyBridge alloc] initWithBundleURL:[NSURL fileURLWithPath:commonBundlePath] moduleProvider:nil launchOptions:nil];
-    HippyRootView *rootView = [[HippyRootView alloc] initWithBridge:bridge businessURL:[NSURL fileURLWithPath:businessBundlePath] moduleName:@"Demo" initialProperties:  @{@"isSimulator": @(isSimulator)} launchOptions:nil shareOptions:nil debugMode:NO delegate:nil];
+    HippyRootView *rootView = [[HippyRootView alloc] initWithBridge:bridge businessURL:[NSURL fileURLWithPath:businessBundlePath] moduleName:@"feed" initialProperties:  @{@"isSimulator": @(isSimulator)} launchOptions:nil shareOptions:nil debugMode:NO delegate:nil];
     rootView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     rootView.frame = self.view.bounds;
     [self.view addSubview:rootView];
