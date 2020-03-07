@@ -27,37 +27,37 @@ import java.util.List;
 @Deprecated
 public class MyHippyEngineHost extends HippyEngineHost
 {
-	private Application	mApplication;
+    private Application	mApplication;
 
-	public MyHippyEngineHost(Application application)
-	{
-		super(application);
-		this.mApplication = application;
-	}
+    public MyHippyEngineHost(Application application)
+    {
+        super(application);
+        this.mApplication = application;
+    }
 
-	@Override
-	protected List<HippyAPIProvider> getPackages()
-	{
-		List<HippyAPIProvider> providers = new ArrayList<>();
-		providers.add(new MyAPIProvider());
-		return providers;
-	}
+    @Override
+    protected List<HippyAPIProvider> getPackages()
+    {
+        List<HippyAPIProvider> providers = new ArrayList<>();
+        providers.add(new MyAPIProvider());
+        return providers;
+    }
 
-	@Override
-	protected HippyBundleLoader getCoreBundleLoader()
-	{
-		return new HippyAssetBundleLoader(mApplication, "vendor.android.js");
-	}
+    @Override
+    protected HippyBundleLoader getCoreBundleLoader()
+    {
+        return new HippyAssetBundleLoader(mApplication, "vendor.android.js");
+    }
 
-	@Override
-	public HippyGlobalConfigs getHippyGlobalConfigs()
-	{
-		return new HippyGlobalConfigs.Builder().setContext(mApplication).setExceptionHandler(new MyExceptionHandler()).setImageLoaderAdapter(new MyImageLoader()).build();
-	}
+    @Override
+    public HippyGlobalConfigs getHippyGlobalConfigs()
+    {
+        return new HippyGlobalConfigs.Builder().setContext(mApplication).setExceptionHandler(new MyExceptionHandler()).setImageLoaderAdapter(new MyImageLoader()).build();
+    }
 
-	@Override
-	protected boolean enableHippyBufferBridge()
-	{
-		return true;
-	}
+    @Override
+    protected boolean enableHippyBufferBridge()
+    {
+        return true;
+    }
 }
