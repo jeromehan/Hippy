@@ -80,9 +80,11 @@ export default {
   color: #ffffff;
 }
 .container {
-  background: #fff;
+  background-color: #fff;
+  flex: 1;
 }
 .content {
+  flex: 1;
   overflow: scroll;
   margin-top: 10px;
 }
