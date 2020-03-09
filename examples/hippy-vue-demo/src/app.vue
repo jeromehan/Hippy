@@ -9,9 +9,9 @@
       <label class="title">Hippy Vue 示例</label>
       <label class="title" @click="remoteDebug">{{ subtitle }}</label>
     </div>
-    <keep-alive>
+    <!-- <keep-alive>
       <router-view class="feature-content"></router-view>
-    </keep-alive>
+    </keep-alive> -->
   </div>
 </template>
 

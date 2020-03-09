@@ -1,72 +1,63 @@
-/*!
-* iOS SDK
-*
-* Tencent is pleased to support the open source community by making
-* Hippy available.
-*
-* Copyright (C) 2019 THL A29 Limited, a Tencent company.
-* All rights reserved.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "HippyRootView.h"
 @interface AppDelegate ()
-
+{
+  UINavigationController *rootViewController;
+  UIViewController *mainViewController;
+}
 @end
+
 
 @implementation AppDelegate
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    // List available fonts exist.
-    /*
-    for (NSString* family in [UIFont familyNames])
-    {
-      NSLog(@"%@", family);
-      for (NSString* name in [UIFont fontNamesForFamilyName: family])
-      {
-        NSLog(@" %@", name);
-      }
-    }
-    */
-
-    // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    ViewController *vc = [ViewController new];
-    [self.window setRootViewController: vc];
-    [self.window makeKeyAndVisible];
-    return YES;
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  mainViewController = [UIViewController new];
+  mainViewController.view = [[NSBundle mainBundle] loadNibNamed:@"MainScreen" owner:self options:nil].lastObject;
+  rootViewController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+  mainViewController.edgesForExtendedLayout = UIRectEdgeNone;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
+  UIButton* feedBtn = [mainViewController.view viewWithTag:100];
+  UIButton* detailBtn = [mainViewController.view viewWithTag:101];
+  [feedBtn addTarget:self action:@selector(goFeed:) forControlEvents:UIControlEventTouchUpInside];
+  [detailBtn addTarget:self action:@selector(goDetail:) forControlEvents:UIControlEventTouchUpInside];
+  return YES;
 }
 
+-(void)goFeed:(UIButton *)button{
+  [self gotoBuzWithModuleName:@"feed" bundleName:@"feed.ios"];
+}
 
-#pragma mark - UISceneSession lifecycle
+-(void)goDetail:(UIButton *)button{
+  [self gotoBuzWithModuleName:@"detail" bundleName:@"detail.ios"];
+}
 
-
-//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-//    // Called when a new scene session is being created.
-//    // Use this method to select a configuration to create the new scene with.
-//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-//}
-
-
-//- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-//    // Called when the user discards a scene session.
-//    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-//    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-//}
-
+-(void) gotoBuzWithModuleName:(NSString*)moduleName bundleName:(NSString*)bundleName{
+  BOOL isSimulator = NO;
+  #if TARGET_IPHONE_SIMULATOR
+      isSimulator = YES;
+  #endif
+  UIViewController *rootViewController = [UIViewController new];
+  NSString *businessBundlePath = [[NSBundle mainBundle] pathForResource:bundleName ofType:@"js" inDirectory:@"res"];
+  NSString *commonBundlePath = [[NSBundle mainBundle] pathForResource:@"vendor.ios" ofType:@"js" inDirectory:@"res"];
+  HippyBridge *bridge = [[HippyBridge alloc] initWithBundleURL:[NSURL fileURLWithPath:commonBundlePath] moduleProvider:nil launchOptions:nil];
+  HippyRootView *rootView = [[HippyRootView alloc] initWithBridge:bridge businessURL:[NSURL fileURLWithPath:businessBundlePath] moduleName:moduleName initialProperties:  @{@"isSimulator": @(isSimulator)} launchOptions:nil shareOptions:nil debugMode:NO delegate:nil];
+//  rootView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+  rootViewController.view = rootView;
+  rootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+  [mainViewController.navigationController pushViewController:rootViewController animated:YES];
+}
 
 @end
+
+

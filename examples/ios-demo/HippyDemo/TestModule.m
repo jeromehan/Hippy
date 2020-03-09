@@ -42,7 +42,7 @@ HIPPY_EXPORT_METHOD(debug:(nonnull NSNumber *)instanceId)
 #if TARGET_IPHONE_SIMULATOR
 	isSimulator = YES;
 #endif
-    HippyRootView *rootView = [[HippyRootView alloc] initWithBridge:nil businessURL:nil moduleName:@"Demo" initialProperties:@{@"isSimulator": @(isSimulator)} launchOptions:nil shareOptions:nil debugMode:YES delegate:nil];
+    HippyRootView *rootView = [[HippyRootView alloc] initWithBridge:nil businessURL:nil moduleName:@"feed" initialProperties:@{@"isSimulator": @(isSimulator)} launchOptions:nil shareOptions:nil debugMode:YES delegate:nil];
 	rootView.backgroundColor = [UIColor whiteColor];
 	rootView.frame = vc.view.bounds;
 	[vc.view addSubview:rootView];

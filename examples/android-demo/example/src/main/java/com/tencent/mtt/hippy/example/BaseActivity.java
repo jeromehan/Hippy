@@ -24,97 +24,97 @@ import com.tencent.mtt.hippy.modules.nativemodules.deviceevent.DeviceEventModule
 
 public class BaseActivity extends Activity implements EngineListener, DeviceEventModule.InvokeDefaultBackPress
 {
-	private MyHippyEngineHost	mHost;
-	private HippyEngineManager		mEngineManager;
-	private HippyRootView			mInstance;
+    private MyHippyEngineHost	mHost;
+    private HippyEngineManager		mEngineManager;
+    private HippyRootView			mInstance;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
-		mHost = new MyHippyEngineHost(BaseActivity.this.getApplication());
-    mEngineManager = mHost.createDebugHippyEngineManager("index.bundle");
-		mEngineManager.addEngineEventListener(this);
-		mEngineManager.initEngineInBackground();
-
-		getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-	}
-
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		mEngineManager.onEngineResume();
-	}
-
-
-	@Override
-	protected void onStop()
-	{
-		super.onStop();
-		mEngineManager.onEnginePause();
-	}
-
-	@Override
-	protected void onDestroy()
-	{
-		mEngineManager.destroyInstance(mInstance);
-		mEngineManager.removeEngineEventListener(this);
-		mEngineManager.destroyEngine();
-		super.onDestroy();
-	}
-
-	@Override
-	public void onBackPressed()
-	{
-		if (mEngineManager.onBackPress(this))
-		{
-			return;
-		}
-		else
-		{
-			super.onBackPressed();
-		}
-	}
-
-
-	@Override
-	public void callSuperOnBackPress()
-	{
-
-		super.onBackPressed();
-	}
-
-
-	@Override
-	public void onInitialized(int i, String s) {
-    HippyRootViewParams.Builder builder = new HippyRootViewParams.Builder();
-    HippyMap params = new HippyMap();
-    HippyAssetBundleLoader hippyAssetBundleLoader = new HippyAssetBundleLoader(this,"index.android.js");
-    if(!mEngineManager.isDebugMode())
+    @Override
+    public void onCreate(Bundle savedInstanceState)
     {
-      builder.setBundleLoader(hippyAssetBundleLoader);
+        super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        mHost = new MyHippyEngineHost(BaseActivity.this.getApplication());
+        mEngineManager = mHost.createDebugHippyEngineManager("index.bundle");
+        mEngineManager.addEngineEventListener(this);
+        mEngineManager.initEngineInBackground();
+
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
     }
-    builder.setActivity(BaseActivity.this).setName("Demo")
-      .setLaunchParams(params);
-    mInstance = mEngineManager.loadInstance(builder.build(), new HippyEngine.ModuleListener() {
 
-        // Hippy模块加载监听
-        /**
-         * @param  statusCode status code from initializing procedure
-         * @param  msg Message from initializing procedure
-         */
-        @Override
-        public void onInitialized(int statusCode, String msg,HippyRootView hippyRootView) {
-          if (statusCode == 0) {
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mEngineManager.onEngineResume();
+    }
 
 
-          }
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        mEngineManager.onEnginePause();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        mEngineManager.destroyInstance(mInstance);
+        mEngineManager.removeEngineEventListener(this);
+        mEngineManager.destroyEngine();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (mEngineManager.onBackPress(this))
+        {
+            return;
         }
-      }
-    );
-    setContentView(mInstance);
-	}
+        else
+        {
+            super.onBackPressed();
+        }
+    }
+
+
+    @Override
+    public void callSuperOnBackPress()
+    {
+
+        super.onBackPressed();
+    }
+
+
+    @Override
+    public void onInitialized(int i, String s) {
+        HippyRootViewParams.Builder builder = new HippyRootViewParams.Builder();
+        HippyMap params = new HippyMap();
+        HippyAssetBundleLoader hippyAssetBundleLoader = new HippyAssetBundleLoader(this,"index.android.js");
+        if(!mEngineManager.isDebugMode())
+        {
+            builder.setBundleLoader(hippyAssetBundleLoader);
+        }
+        builder.setActivity(BaseActivity.this).setName("Demo")
+                .setLaunchParams(params);
+        mInstance = mEngineManager.loadInstance(builder.build(), new HippyEngine.ModuleListener() {
+
+                    // Hippy模块加载监听
+                    /**
+                     * @param  statusCode status code from initializing procedure
+                     * @param  msg Message from initializing procedure
+                     */
+                    @Override
+                    public void onInitialized(int statusCode, String msg,HippyRootView hippyRootView) {
+                        if (statusCode == 0) {
+
+
+                        }
+                    }
+                }
+        );
+        setContentView(mInstance);
+    }
 }
