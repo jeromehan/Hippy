@@ -32,6 +32,7 @@
   BOOL _jsRequestingFirstResponder;
 }
 
+
 - (void)setKeyboardType:(UIKeyboardType)keyboardType {
     NSString *tempPwdStr = self.text;
     self.text = @"";
@@ -158,6 +159,7 @@
     [_textView addTarget:self action:@selector(textFieldBeginEditing) forControlEvents:UIControlEventEditingDidBegin];
     [_textView addTarget:self action:@selector(textFieldSubmitEditing) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self addSubview:_textView];
+      
   }
   return self;
 }
@@ -382,7 +384,6 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   } else {
     _textView.placeholder = placeholder;
   }
-  
 }
 - (void)setText:(NSString *)text
 {
