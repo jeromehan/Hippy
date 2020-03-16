@@ -33,6 +33,10 @@ export default {
       this.subtitle = to.name;
     }
   },
+  mounted(){
+    console.log(global.TestModule.Print())
+    console.log(global.TestModule.RetStr())
+  },
   data() {
     return {
       imgs: {
