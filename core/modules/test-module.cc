@@ -15,10 +15,3 @@ void TestModule::RetStr(const hippy::napi::CallbackInfo& info) {
 
 void TestModule::Print(const hippy::napi::CallbackInfo& info) {
   std::shared_ptr<Environment> env = info.GetEnv();
-  hippy::napi::napi_context context = env->getContext();
-  HIPPY_CHECK(context);
-
-  HIPPY_LOG(hippy::Debug, "hello world");
-
-  info.GetReturnValue()->SetUndefined();
-}
