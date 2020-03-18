@@ -37,7 +37,7 @@
         <button class="buttons reset">
           <span class="reset-name">重置</span>
         </button>
-        <button class="buttons" @click="dl()">
+        <button class="buttons" @click="denglu()">
           <span class="loginbtn-name">登录</span>
         </button>
       </div>
@@ -63,6 +63,10 @@ export default {
       }
       this.subtitle = to.name;
     }
+  },
+  mounted() {
+    global.TestModule.Print();
+    console.log(global.TestModule.RetStr());
   },
   data() {
     return {

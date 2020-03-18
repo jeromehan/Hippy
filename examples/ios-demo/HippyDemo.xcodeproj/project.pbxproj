@@ -150,6 +150,7 @@
 		067AB97623B5F309009D5EE2 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 067AB97423B5F309009D5EE2 /* MyView.m */; };
 		AC63515623F92C99007FABA5 /* TTTGB-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC63515523F92C99007FABA5 /* TTTGB-Medium.otf */; };
 		E1318F71241355FB00862D1D /* MainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1318F70241355FB00862D1D /* MainScreen.xib */; };
+		E1669F1D241FB7B1001CF006 /* test-module.cc in Sources */ = {isa = PBXBuildFile; fileRef = E1669F1C241FB7B1001CF006 /* test-module.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -475,6 +476,8 @@
 		067AB97423B5F309009D5EE2 /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		AC63515523F92C99007FABA5 /* TTTGB-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTTGB-Medium.otf"; sourceTree = "<group>"; };
 		E1318F70241355FB00862D1D /* MainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainScreen.xib; sourceTree = "<group>"; };
+		E1669F1B241FB7B1001CF006 /* test-module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test-module.h"; sourceTree = "<group>"; };
+		E1669F1C241FB7B1001CF006 /* test-module.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "test-module.cc"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1098,6 +1101,8 @@
 		064C5A9523AB1A59001E80DD /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				E1669F1C241FB7B1001CF006 /* test-module.cc */,
+				E1669F1B241FB7B1001CF006 /* test-module.h */,
 				064C5A9623AB1A59001E80DD /* timer-module.h */,
 				064C5A9723AB1A59001E80DD /* module-register.h */,
 				064C5A9823AB1A59001E80DD /* module-base.h */,
@@ -1264,6 +1269,7 @@
 				064C5ADA23AB1A59001E80DD /* engine-impl.cc in Sources */,
 				064C5A4923AB1A51001E80DD /* HippyEventDispatcher.m in Sources */,
 				064C5A0123AB1A51001E80DD /* HippyExceptionModule.m in Sources */,
+				E1669F1D241FB7B1001CF006 /* test-module.cc in Sources */,
 				064C5AEE23AB1A59001E80DD /* js-native-api-value-jsc.cc in Sources */,
 				064C59EE23AB1A51001E80DD /* MTTTStyle.cpp in Sources */,
 				064C5AE023AB1A59001E80DD /* timer-module.cc in Sources */,
