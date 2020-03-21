@@ -10,8 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-//            abiFilters "armeabi-v7a"
-            abiFilters "x86", "x86_64"
+//            abiFilters "armeabi", "armeabi-v7a", "x86"
+            abiFilters "x86"
         }
     }
 
@@ -34,16 +34,18 @@ android {
             minifyEnabled false
         }
     }
-//    externalNativeBuild {
-//        cmake {
-//            path file('../../../android/sdk/src/main/jni/armeabi-v7a/CMakeLists.txt')
-//        }
-//    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
-    api project(path:':android-sdk')
-    api project(path:':support_ui')
+//    api project(path:':android-sdk')
+//    api project(path:':support_ui')
+    implementation(name:'android-sdk-release', ext:'aar')
+    implementation files('libs/support-ui.jar')
     api 'com.github.bumptech.glide:glide:3.6.1'
     api 'com.android.support:support-v4:26.1.0'
 }
