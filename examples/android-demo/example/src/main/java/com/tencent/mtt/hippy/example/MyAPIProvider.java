@@ -1,5 +1,4 @@
 package com.tencent.mtt.hippy.example;
-
 import com.tencent.mtt.hippy.HippyAPIProvider;
 import com.tencent.mtt.hippy.HippyEngineContext;
 import com.tencent.mtt.hippy.common.Provider;
