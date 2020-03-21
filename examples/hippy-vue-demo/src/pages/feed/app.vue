@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <div class="header">
-      <label class="title">feed页</label>
+      <label class="title">feed页{{test}}</label>
       <label class="title" @click="remoteDebug">{{ subtitle }}</label>
     </div>
     <!-- <div class="container">
@@ -65,11 +65,11 @@ export default {
     }
   },
   mounted() {
-    global.TestModule.Print();
-    console.log(global.TestModule.RetStr());
+    this.test = global.TestModule.RetStr();
   },
   data() {
     return {
+      test: '',
       password: "",
       imgs: {
         backButtonImg
