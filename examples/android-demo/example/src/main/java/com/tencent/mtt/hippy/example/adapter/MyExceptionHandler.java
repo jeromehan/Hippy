@@ -4,8 +4,6 @@ import android.util.Log;
 import com.tencent.mtt.hippy.adapter.exception.HippyExceptionHandlerAdapter;
 import com.tencent.mtt.hippy.common.HippyJsException;
 import com.tencent.mtt.hippy.example.MyActivity;
-import com.tencent.mtt.hippy.example.MyActivityTiny;
-
 /**
  * @Description:
  * @author: edsheng

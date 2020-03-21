@@ -15,3 +15,4 @@ void TestModule::RetStr(const hippy::napi::CallbackInfo& info) {
 
 void TestModule::Print(const hippy::napi::CallbackInfo& info) {
   std::shared_ptr<Environment> env = info.GetEnv();
+}
