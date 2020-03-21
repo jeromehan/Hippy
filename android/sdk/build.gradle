@@ -294,6 +294,7 @@ android {
     }
 
     lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
 //    clean.dependsOn cleanNdkLibs
