@@ -1,12 +1,15 @@
 #! /bin/bash
 #following three variables should be set depend on your enviroment.
 #if you use git bash in windows, should use path like linux, such as use /d for D:/ 
-ANDROID_SDK_CMAKE_BIN=/home/ianwang/Android/Sdk/cmake/3.6.4111459/bin
-ANDROID_NDK=/home/ianwang/Android/Sdk/ndk-bundle
+ANDROID_SDK_CMAKE_BIN=/Users/hanfei/Library/Android/sdk/cmake/3.6.4111459/bin
+ANDROID_NDK=/Users/hanfei/Library/Android/sdk/ndk/21.1.6210238
 #for windows strip 
 #ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin/arm-linux-androideabi-strip
+#for mac strip
+#ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-strip
 #for linux strip
-ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-strip
+ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-strip
+
 
 #set cmake and ninja path
 export PATH="${ANDROID_SDK_CMAKE_BIN}":$PATH
@@ -67,7 +70,9 @@ ${ANDROID_NINJA}
 
 #strip so
 #for arm64 linux strip
-ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip
+#darwin-x86_64
+#linux-x86_64
+ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64/bin/aarch64-linux-android-strip
 ${ANDROID_SO_STRIP} --strip-all -x libflexbox.so -o libflexbox_strip.so
 
 cp ./libflexbox_strip.so ${BASH_SOURCE_DIR}/libs/${ANDROID_ABI}/libflexbox_strip.so
@@ -95,7 +100,7 @@ ${ANDROID_NINJA}
 
 #strip so
 #for x86 linux strip
-ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/x86-4.9/prebuilt/linux-x86_64/bin/i686-linux-android-strip
+ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/x86-4.9/prebuilt/darwin-x86_64/bin/i686-linux-android-strip
 ${ANDROID_SO_STRIP} --strip-all -x libflexbox.so -o libflexbox_strip.so
 
 cp ./libflexbox_strip.so ${BASH_SOURCE_DIR}/libs/${ANDROID_ABI}/libflexbox_strip.so
@@ -124,7 +129,7 @@ ${ANDROID_NINJA}
 
 #strip so
 #for x86 linux strip
-ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin/x86_64-linux-android-strip
+ANDROID_SO_STRIP=${ANDROID_NDK}/toolchains/x86_64-4.9/prebuilt/darwin-x86_64/bin/x86_64-linux-android-strip
 ${ANDROID_SO_STRIP} --strip-all -x libflexbox.so -o libflexbox_strip.so
 
 cp ./libflexbox_strip.so ${BASH_SOURCE_DIR}/libs/${ANDROID_ABI}/libflexbox_strip.so
