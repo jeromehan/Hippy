@@ -23,7 +23,6 @@ ext {
     // Visual Studio Debugging Support
     skipCmakeAndNinja = System.getenv('skipCmakeAndNinja') != null
 }
-
 def findNdkFullPath() {
     if (ndkDir) {
         return ndkDir
@@ -86,21 +85,20 @@ task compileCmake(dependsOn: copyCore, type: Exec) {
     cMakeWorkDir.deleteDir()
     cMakeWorkDir.mkdirs()
     setWorkingDir(cMakeWorkDir)
-    // def arches = ["armeabi-v7a", "arm64-v8a", "x86_64", "x86"]
+//    def arches = ["armeabi-v7a", "arm64-v8a", "x86_64", "x86"]
     def arches = ["x86"]
     for (arch in arches) {
-    commandLine findCmakeBuildPath(),
-            "-DANDROID_ABI=${arch}",
-            "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=$project.buildDir.absolutePath/outputs/${arch}/",
-            "-DANDROID_TOOLCHAIN=clang",
-            "-DANDROID_CPP_FEATURES=rtti exceptions",
-            "-DANDROID_NDK=${findNdkFullPath()}",
-            "-DANDROID_PLATFORM=android-14",
-            "-DCMAKE_BUILD_TYPE=Release",
-            "-DCMAKE_TOOLCHAIN_FILE=${findToolChainPath()}",
-                "-G", "Android Gradle - Ninja", file("src/main/jni/${arch}").absolutePath
+        commandLine findCmakeBuildPath(),
+                    "-DANDROID_ABI=${arch}",
+                    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=$project.buildDir.absolutePath/outputs/${arch}/",
+                    "-DANDROID_TOOLCHAIN=clang",
+                    "-DANDROID_CPP_FEATURES=rtti exceptions",
+                    "-DANDROID_NDK=${findNdkFullPath()}",
+                    "-DANDROID_PLATFORM=android-14",
+                    "-DCMAKE_BUILD_TYPE=Release",
+                    "-DCMAKE_TOOLCHAIN_FILE=${findToolChainPath()}",
+                    "-G", "Android Gradle - Ninja", file("src/main/jni/${arch}").absolutePath
     }
-
 }
 
 task compileNinja(dependsOn: compileCmake, type: Exec) {
@@ -222,6 +220,7 @@ task address2Line(type: Exec) {
             project.buildDir.absolutePath + "/outputs/libhippybridge.so",
             address
 }
+// dependsOn: (ISCI.toBoolean() ? dealNdkLibSymbols : stripSO)
 
 task buildNdkLibs(dependsOn: (ISCI.toBoolean() ? dealNdkLibSymbols : stripSO)) {
     copy {
